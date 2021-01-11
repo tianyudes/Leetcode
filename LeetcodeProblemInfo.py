@@ -44,16 +44,13 @@ Replace = [
 
 
 def convert(src):
-    #
     def remove_label_in_pre(matched):
         tmp = matched.group()
-        tmp = re.sub("<[^>p]*>", "", tmp)   # 不匹配>与p
+        tmp = re.sub("<[^>p]*>", "", tmp)   
         return tmp
-    src = re.sub("<pre>[\s\S]*?</pre>", remove_label_in_pre, src)   # 注意此处非贪心匹配，因为可能有多个示例
-    # 可以直接删除的标签
+    src = re.sub("<pre>[\s\S]*?</pre>", remove_label_in_pre, src)  
     for curPattern in Remove:
         src = re.sub(curPattern, "", src)
-    # 需要替换内容的标签
     for curPattern, curRepl in Replace:
         src = re.sub(curPattern, curRepl, src)
     return src
@@ -65,7 +62,7 @@ def get_problem_content(id):
     '''
 
     :param id: string The ID of the question to be check
-    :return:
+    :return:　null
     '''
     f = open(questionList, 'r')
     lines = f.readlines()
@@ -95,7 +92,7 @@ def get_problem_content(id):
     resp = session.post(url, data=json_data, headers=headers, timeout=10)
     resp.encoding = 'utf8'
     content = resp.json()
-    # 题目详细信息
+    # 問題内容
     print(content)
     question = content['data']['question']
     fh = open('res.md', 'w', encoding='utf-8')
