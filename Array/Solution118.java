@@ -24,4 +24,4 @@ public class Solution118 {
         return res;
     }
 }
-//就是要建立两个list，新的和旧的，这样才能继续。
+//
